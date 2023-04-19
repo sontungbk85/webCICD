@@ -65,9 +65,9 @@ pipeline {
                     git config user.email "sontungbk85@gmail.com"
                     sh "git add deployment.yml"
                     sh "git commit -m 'updated the deployment file'"
-                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/sontungbk85/webcicd.git main"
-                    }
+					withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                    sh "git push https://github.com/sontungbk85/webcicd.git main"
+					}
                 }
             }
         }
