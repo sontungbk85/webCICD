@@ -62,6 +62,9 @@ pipeline{
             }
         }
         stage('Push the changed deployment file to Git'){
+            when {
+                expression { return currentBuild.result == 'SUCCESS' }
+            }
             steps{
                 script{
                     sh """
@@ -75,10 +78,6 @@ pipeline{
                     }
                 }
             }
-        }
-        when {
-        branch 'main'
-        expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
         }
     }
 }
